@@ -1,7 +1,8 @@
 import { SavedSearchProvider } from './../../providers/saved-search/saved-search';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-//import { SocialSharing } from '@ionic-native/social-sharing';
+import { QRCodeComponent } from 'angularx-qrcode';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 @Component({
@@ -11,8 +12,9 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
   public QRCodetext: string;
   public isGenerated: boolean;
+  @ViewChild(QRCodeComponent) qrcodeHtml: QRCodeComponent;
 
-  constructor(public navCtrl: NavController, public savedSearch: SavedSearchProvider) { }
+  constructor(public navCtrl: NavController, public savedSearch: SavedSearchProvider, private socialSharing: SocialSharing) { }
 
   GenerateQRCode() {
     if (this.QRCodetext !== null || this.QRCodetext.length > 0) {
@@ -24,18 +26,13 @@ export class HomePage {
   }
 
   share() {
-    const ee: string = this.convertQRCodeIntoUrl();
-    console.log(ee);
+    const imgBase64: string = this.qrcodeHtml.el.nativeElement.children[1].src;
+    console.log(imgBase64);
 
-    //this.socialSharing.shareWithOptions();
-  }
-
-  convertQRCodeIntoUrl(): string {
-    const svg: string = document.getElementById("qrCodeElement").innerHTML;
-    console.log("inner element" + svg);
-    const blob = new Blob([svg], { type: 'image/svg+xml' });
-    const url: string = URL.createObjectURL(blob);
-    console.log("url" + url);
-    return url;
+    this.socialSharing
+      .share(this.QRCodetext, null, imgBase64)
+      .catch(err => {
+        console.error(err);
+      });
   }
 }

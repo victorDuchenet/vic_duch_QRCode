@@ -47,7 +47,6 @@ import { SavedSearchProvider } from '../providers/saved-search/saved-search';
     SavedSearchProvider,
     BarcodeScanner,
     Camera
-
   ]
 })
 export class AppModule {}
