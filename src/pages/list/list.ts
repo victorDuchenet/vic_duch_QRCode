@@ -6,8 +6,6 @@ import { storedSearch } from '../../app/models/storedSearch';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
-
-
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -16,7 +14,7 @@ export class ListPage {
   public storeSearchs: storedSearch[];
   public TextFromQrScanned: string;
 
-  constructor(public navCtrl: NavController, private savedSearch: SavedSearchProvider, private barCodeScanner: BarcodeScanner, private camera : Camera) { }
+  constructor(public navCtrl: NavController, private savedSearch: SavedSearchProvider, private barCodeScanner: BarcodeScanner, private camera: Camera) { }
 
   ngOnInit() {
     this.storeSearchs = this.savedSearch.getStoredSearch();
@@ -36,16 +34,15 @@ export class ListPage {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }
     this.camera.getPicture(options).then((imageData) => {
 
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(base64Image); 
-     }, (err) => {
-      // Handle error
-     });
-    
+    }, (err) => {
+      console.error(err)
+    });
+
 
   }
 }
