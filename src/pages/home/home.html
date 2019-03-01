@@ -17,7 +17,7 @@
   <button ion-button (click)="GenerateQRCode()"> Generer votre QR Code </button>
 
   <div *ngIf="isGenerated">
-    <qrcode #qrcodeHtml id="qrCodeElement" [qrdata]="QRCodetext" [size]="256" [level]="'M'"></qrcode>
+    <qrcode #qrcodeHtml [qrdata]="QRCodetext" [size]="256" [level]="'M'" [usesvg]="false"></qrcode>
     <button ion-button (click)="share()">
       <ion-icon name="share"></ion-icon>
     </button>

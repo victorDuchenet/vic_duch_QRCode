@@ -27,12 +27,12 @@ export class HomePage {
 
   share() {
     const imgBase64: string = this.qrcodeHtml.el.nativeElement.children[1].src;
-    console.log(imgBase64);
+    console.log('toto', imgBase64);
 
-    this.socialSharing
-      .share(this.QRCodetext, null, imgBase64)
-      .catch(err => {
-        console.error(err);
-      });
+    // this.socialSharing
+    //   .share(null, null, imgBase64)
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
   }
 }
