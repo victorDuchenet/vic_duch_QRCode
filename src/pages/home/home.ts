@@ -1,9 +1,7 @@
-import { StoreSearchProvider } from './../../providers/store-search/store-search';
-import { Component} from '@angular/core';
+import { SavedSearchProvider } from './../../providers/saved-search/saved-search';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 //import { SocialSharing } from '@ionic-native/social-sharing';
-
-
 
 
 @Component({
@@ -14,12 +12,12 @@ export class HomePage {
   public QRCodetext: string;
   public isGenerated: boolean;
 
-  constructor(public navCtrl: NavController/*, private socialSharing: SocialSharing*/,private store: StoreSearchProvider) { }
+  constructor(public navCtrl: NavController, public savedSearch: SavedSearchProvider) { }
 
   GenerateQRCode() {
-    if (this.QRCodetext !== null && this.QRCodetext.length > 0) {
+    if (this.QRCodetext !== null || this.QRCodetext.length > 0) {
       this.isGenerated = true;
-    
+      this.savedSearch.storeSearch(this.QRCodetext, new Date());
     } else {
       this.isGenerated = false;
     }
@@ -28,8 +26,7 @@ export class HomePage {
   share() {
     const ee: string = this.convertQRCodeIntoUrl();
     console.log(ee);
-    let to: string[] = new Array();
-    to.push("victorduchenet@gmail.com")
+
     //this.socialSharing.shareWithOptions();
   }
 

@@ -1,3 +1,5 @@
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -14,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
 
 import { QrCodeProvider } from '../providers/qr-code/qr-code';
-import { StoreSearchProvider } from '../providers/store-search/store-search';
+import { SavedSearchProvider } from '../providers/saved-search/saved-search';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,7 @@ import { StoreSearchProvider } from '../providers/store-search/store-search';
     ListPage
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,  
     HttpClientModule,
     QRCodeModule,
     IonicModule.forRoot(MyApp),
@@ -40,7 +43,8 @@ import { StoreSearchProvider } from '../providers/store-search/store-search';
     SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     QrCodeProvider,
-    StoreSearchProvider
+    SavedSearchProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule {}
