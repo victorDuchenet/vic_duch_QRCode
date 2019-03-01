@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SavedSearchProvider } from '../../providers/saved-search/saved-search';
 import { storedSearch } from '../../app/models/storedSearch';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 
 
@@ -15,7 +16,7 @@ export class ListPage {
   public storeSearchs: storedSearch[];
   public TextFromQrScanned: string;
 
-  constructor(public navCtrl: NavController, private savedSearch: SavedSearchProvider, private barCodeScanner: BarcodeScanner , private imagePicker : ImagePicker) { }
+  constructor(public navCtrl: NavController, private savedSearch: SavedSearchProvider, private barCodeScanner: BarcodeScanner, private camera : Camera) { }
 
   ngOnInit() {
     this.storeSearchs = this.savedSearch.getStoredSearch();
@@ -24,24 +25,26 @@ export class ListPage {
   ScannerBtn() {
     this.barCodeScanner.scan().then(barcodeData => {
       this.TextFromQrScanned = barcodeData.text;
-     }).catch(err => {
-         console.log('Error', err);
-     });
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
+
+  imagePickerBtn() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(base64Image);
+     }, (err) => {
+      // Handle error
+     });
     
-  imagePickerBtn(){
-    let options: ImagePickerOptions = {  
-      quality: 100,  
-      width: 600,  
-      height: 600,
-     outputType:1,
-      maximumImagesCount: 1
-      //while setting a number 15 we can load 15 images in one selection.  
-  }; 
-    this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[i]);
-      }
-    }, (err) => console.error(err));
+
   }
 }

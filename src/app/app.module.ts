@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -44,7 +45,9 @@ import { SavedSearchProvider } from '../providers/saved-search/saved-search';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     QrCodeProvider,
     SavedSearchProvider,
-    BarcodeScanner
+    BarcodeScanner,
+    Camera
+
   ]
 })
 export class AppModule {}

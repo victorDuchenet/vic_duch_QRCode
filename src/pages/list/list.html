@@ -8,15 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button (click)="ScannerBtn()"> scanner le QR Code </button>
-  <button ion-button (click)="imagePickerBtn()"> scanner le QR Code </button>
-  <label *ngIf="TextFromQrScanned">{{TextFromQrScanned}}</label>
-  <h2> historique des QR Code generés</h2>
-  <ion-list>
-    <ion-item ion-item *ngFor="let search of storeSearchs">
-      {{search.text}}
-      {{search.date}}
-    </ion-item>
-  </ion-list>
-
+  <div>
+    <div>
+      <h2> decoder une QR Code</h2>
+      <button ion-button (click)="ScannerBtn()">depuis votre camera </button>
+      <button ion-button (click)="imagePickerBtn()"> depuis une image</button>
+    </div>
+    <div><label *ngIf="TextFromQrScanned">{{TextFromQrScanned}}</label></div>
+  </div>
+  <div>
+    <h2> historique des QR Code generés</h2>
+    <ion-list>
+      <ion-item ion-item *ngFor="let search of storeSearchs">
+        {{search.text}}
+        {{search.date}}
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
