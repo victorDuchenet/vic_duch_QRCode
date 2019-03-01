@@ -35,12 +35,13 @@ export class ListPage {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }
     this.camera.getPicture(options).then((imageData) => {
 
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(base64Image);
+      console.log(base64Image); 
      }, (err) => {
       // Handle error
      });
