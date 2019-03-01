@@ -11,12 +11,12 @@ import { Injectable } from '@angular/core';
 export class QrCodeProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello QrCodeProvider Provider');
   }
 
   generate(text: string): Promise<string> {
     //TODO: Code this
-    return Promise.resolve('');
+  
+    return Promise.resolve(text);
   }
 
 }
